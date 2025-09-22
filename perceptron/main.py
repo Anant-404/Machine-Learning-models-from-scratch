@@ -1,7 +1,9 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn import datasets
+from sklearn.preprocessing import StandardScaler
 from .perceptron import Perceptron
+from .perceptron_delta_rule import Perceptron_delta_rule
 
 #loading  Iris dataset
 
@@ -11,9 +13,13 @@ X=iris.data[:100,[2,3]]
 y=iris.target[:100]
 
 X_train , X_test , y_train , y_test = train_test_split(X,y,test_size=0.2,random_state=123)
-print(y_test)
+print("test output data", y_test)
 
-p=Perceptron(learning_rate=0.1,n_iter=100)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+p=Perceptron_delta_rule(learning_rate=0.1,n_iterations=1000)
 p.fit(X_train,y_train)
 
 predictions = p.predict(X_test)
