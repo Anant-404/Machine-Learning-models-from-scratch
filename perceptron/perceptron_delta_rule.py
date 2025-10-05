@@ -54,3 +54,4 @@ class Perceptron_delta_rule:
         y_in=np.dot(x, self.weights)+self.bias
         # Return class labels using 0.5 threshold
         return (y_in >= 0.5).astype(int)
+        # return step_function(y_in)
